@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sparrow/login/login_page.dart';
+import 'package:flutter_sparrow/login/register_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,6 +23,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
+      routes: {
+        'login':(BuildContext context)=>LoginPage(),
+        '/register':(BuildContext context)=>RegisterPage(),
+      },
     );
   }
 }
@@ -54,6 +60,19 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
+      if(_counter >= 3){
+        //页面跳转 1
+        Navigator.pushNamed(context, 'login');
+      }
+
+//      if(_counter >= 3){
+//        //页面跳转 1
+//        Navigator.push(context, new MaterialPageRoute(builder: (context){
+//                return  Scaffold(
+//                  appBar:  AppBar(title:  Text("我是新的页面"),),
+//                );
+//        }));
+//      }
     });
   }
 
