@@ -29,7 +29,6 @@ class SwTextFiledState extends State<SwTextFiled>{
           hintText: widget.hintText,
           prefixIcon: widget.prefixIcon,
           fillColor: Colors.white),
-      autofocus: true,
       textAlign: TextAlign.start,
     );
   }

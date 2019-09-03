@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sparrow/login/login_page.dart';
 import 'package:flutter_sparrow/login/register_page.dart';
+import 'package:oktoast/oktoast.dart';
 
 void main() => runApp(MyApp());
 
@@ -8,25 +9,29 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+    return OKToast(
+      //因为一般情况下,一个 flutter 应用应该只有一个 MaterialApp(或是 WidgetsApp/CupertinoApp),
+      // 这里包裹后,可以缓存 Context 到 内存中,后续在调用显示时,不用传入 BuildContext
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          // This is the theme of your application.
+          //
+          // Try running your application with "flutter run". You'll see the
+          // application has a blue toolbar. Then, without quitting the app, try
+          // changing the primarySwatch below to Colors.green and then invoke
+          // "hot reload" (press "r" in the console where you ran "flutter run",
+          // or simply save your changes to "hot reload" in a Flutter IDE).
+          // Notice that the counter didn't reset back to zero; the application
+          // is not restarted.
+          primarySwatch: Colors.blue,
+        ),
+        home: LoginPage(),
+        routes: {
+          'login': (BuildContext context) => LoginPage(),
+          '/register': (BuildContext context) => RegisterPage(),
+        },
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-      routes: {
-        'login':(BuildContext context)=>LoginPage(),
-        '/register':(BuildContext context)=>RegisterPage(),
-      },
     );
   }
 }
@@ -60,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
-      if(_counter >= 3){
+      if (_counter >= 3) {
         //页面跳转 1
         Navigator.pushNamed(context, 'login');
       }
